@@ -1,0 +1,5 @@
+Data source: WorldBank indicators
+Data fields : Life expectancy at birth, total (years), Population, total,Fertility rate, total (births per woman)
+Time : 2000-2012
+
+Notes: The data was first downloaded as a csv file and converted into the current data format. The countries selected are random and have no particular linkage or interaction.

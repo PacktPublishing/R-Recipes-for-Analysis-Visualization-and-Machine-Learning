@@ -1,0 +1,92 @@
+---
+title       : A simple example
+subtitle    : 
+author      : ABCD
+job         : GHI
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## Read-And-Delete
+
+> 1. Introduction
+> 2. how to write an equation
+> 3. Plot in R
+> 4. Conclusion
+
+--- 
+
+## Writting an Equations in R
+
+# $ CMR = \hat{ \alpha } +  \ \hat{ \beta}PGNP +  \ \hat{ \gamma }  FLR + \ \hat{ \epsilon } $
+where : CMR = Child Mortality Rate
+        PGNP = per capita GNP
+        FMR = Female Literacy Rate
+
+---
+
+```{r}
+plot(cars, pch = 20, col = "blue")
+```
+
+---
+## Code with output
+
+```{r}
+summary(cars)
+
+```
+
+---
+## code without the output
+```{r eval = FALSE}
+summary(cars)
+```
+
+---
+
+
+## How to read data in slidify
+```{r}
+setwd("C:/Users/agohil/Book")
+data = read.csv("final.csv" , sep = ",", header = TRUE)
+head(data)
+```
+
+---
+## Including a table in your slide
+```{r, results='asis'}
+knitr::kable(data)
+```
+
+---
+## embedding an image in presentation
+
+image: ![](C:/Use2rs/agohil/Book/image1.png)
+
+---
+```{r setOptions, message=FALSE}
+library(googleVis)
+op <- options(gvis.plot.tag='chart')
+```
+
+---
+
+```{r ComboExample, results='asis', tidy=FALSE}
+## Add the mean
+CityPopularity$Mean=mean(CityPopularity$Popularity)
+CC <- gvisComboChart(CityPopularity, xvar='City',
+          yvar=c('Mean', 'Popularity'),
+          options=list(seriesType='bars',
+                       width=450, height=300,
+                       title='City Popularity',
+                       series='{0: {type:\"line\"}}'))
+plot(CC)
+```
+
+---
+

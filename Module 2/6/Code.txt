@@ -1,0 +1,89 @@
+********************************
+***Recipe #1 : Sunflower Plot***
+********************************
+install.packages("HistData")
+library(HistData)
+head(Galton)
+sunflowerplot(Galton$parent,Galton$child,col = "blue", seg.col = "red", xlab = "Parent", ylab ="Child")
+reg1 = lm(Galton$child~Galton$parent)
+abline(reg1, col = "green", lwd = 2)
+
+**********************************
+*** Recipe #2 Hexbin PLot*********
+**********************************
+install.packages("hexbin")
+library(hexbin)
+set.seed(356)
+x = rnorm(1000)
+y = rnorm(1000)
+bins = hexbin(x,y)
+plot(bins)
+plot(bins , border = TRUE)
+plot(bins, border = "red")
+smb = smooth.hexbin(bins)
+plot(smb)
+
+**********************************
+*** Recipe # 3 Calendar Map*******
+**********************************
+install.packages("quantmod","googleVis")
+library(quantmod)
+library(googleVis)
+prices = c("FB")
+getSymbols(prices, src = "yahoo", from =as.Date ("2013-01-01"), to = as.Date("2013-12-31"))
+data =data.frame(date = as.Date(index(FB)), open = as.numeric(FB$FB.Open))
+fb <- gvisCalendar(data, datevar="date", numvar="open",
+		   options=list(title="Daily Prices of Facebook stock",height=320,width = 1000,
+		   calendar="{yearLabel: {color: '#FF0000'},cellSize: 14,cellColor :{strokeWidth: 0.5},
+		   monthOutlineColor:{stroke :'white',strokeWidth: 5}}"))
+plot(fb)
+*********************************
+*** Recipe # 3 Chernoff Faces****
+**********************************
+install.packages("aplpack")
+library(aplpack)
+data1 = read.csv("worldecon.csv", header = TRUE, sep =",")
+head(data1)
+faces(data1[1:10,3:9], labels = data1$Code, main = "A comparative view using Chernoff faces")
+************************************
+***Recipe # 5 : CoxComb plot********
+************************************
+install.packages(c(“HistData”,"plotrix")
+library(HistData)
+library(plotrix)
+data = Nightingale[13:24,]
+month = c("Apr 1855","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec","Jan 1856", "Feb","Mar")
+radial.pie(data$Disease,labels=month, boxed.radial = FALSE,sector.colors =c(rep("#60B1FF",12)),grid.colo= white, grid.col= "white", radlab= TRUE, mar=c(2,10,2,10),show.grid.labels = 0, label.prop= .9)
+## to add grid 
+radial.pie(data1$Disease,labels=data1$Month, boxed.radial = FALSE, show.grid = TRUE)
+radial.pie(data1$Disease,labels=data1$Month, boxed.radial = FALSE,grid.col = "orange", sector.colors =c(rep("grey",12)), radlab = TRUE)
+
+************************************
+***Recipe # 6 : Radial PLot ********
+************************************
+plot.new()
+install.packages("plotrix)
+library(plotrix)
+oil = read.csv("oil.csv")
+radial.plot(oil[,21],rp.type="p",lwd =3,line.col="blue",labels=oil$Month, clockwise = TRUE, start = 1.5, grid.unit = c("$"), main = "Oil prices in 2013")
+## To generate a filled polygon
+radial.plot(oil[,13],rp.type="p",line.col="red",labels=oil$Month, poly.col ="blue")
+## To generate a plot with lines where the length denotes the oil prices
+radial.plot(oil[,13],lwd =3,line.col="red",labels=oil$Month)
+### LOOP ##
+plot.new()
+radial.plot(oil[,2],rp.type="p",lwd =3,line.col="blue",labels=oil$Month, clockwise = TRUE, start = 1.5, grid.unit = c("$"), main = "Oil prices cysles 1994-2013", radial.lim = c(0,4))
+for(i in 3:21){
+radial.plot(oil[,i],rp.type="p",lwd =3,line.col="blue",labels=oil$Month, clockwise = TRUE, start = 1.5, add = TRUE) }
+*****************
+**pyramid plot***
+*****************
+install.packages(c("plotrix","RColorBrewer")
+library(plotrix)
+library(RColorBrewer)
+options(scipen=999)
+data = read.csv("cancer.csv", sep = ",", header = TRUE)
+pyramid.plot(data$Men_g,data$Women_g,labels=data$Causes,unit = NA, gap = 60000,laxlab=c(0,100000,150000,200000),raxlab=c(0,100000,150000,200000), top.labels = c("Male", "Cancer", "Female"),lxcol = "#99d8c9",rxcol = "#bcbddc")
+pyramid.plot(data$Men_d,data$Women_d,labels=data$Causes,unit = NA, gap = 60000,laxlab=c(0,100000,150000,200000),raxlab=c(0,100000,150000,200000),lxcol = "#2ca25f",rxcol = "#8856a7", add = TRUE, space = 0.5)
+legend("topleft", fill = c("#99d8c9","#2ca25f"), legend=c("New Cases","Death"), border = FALSE, bty= "n")
+legend("topright", fill = c("#bcbddc","#8856a7"), legend=c("New Cases","Death"), border = FALSE, bty = "n")

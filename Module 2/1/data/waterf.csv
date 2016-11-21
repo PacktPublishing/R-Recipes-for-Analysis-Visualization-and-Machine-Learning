@@ -1,0 +1,15 @@
+labels,value,logic
+Prev yr,45.0,TRUE
+jan,2.0,FALSE
+feb,-18.0,FALSE
+mar,-25.0,FALSE
+apr,6.0,FALSE
+may,7.6,FALSE
+jun,9.8,FALSE
+jul,-6.8,FALSE
+aug,-10.0,FALSE
+sep,7.7,FALSE
+oct,8.5,FALSE
+nov,-16.0,FALSE
+dec,5.0,FALSE
+prent yr,15.8,TRUE

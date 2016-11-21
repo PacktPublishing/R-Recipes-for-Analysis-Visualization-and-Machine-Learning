@@ -1,0 +1,10 @@
+The data for crime is downloaded from the following:
+
+http://www.fbi.gov/about-us/cjis/ucr/crime-in-the-u.s/2012/crime-in-the-u.s.-2012/property-crime/property-crime
+
+Table 4 on the link will display a page with downloadable excel file.
+
+The data fro each crime is rate per 100000. 
+
+The data has been modified to remove the regions,2011 and percent change variable from the excelfile in order to make it ready fro use in R.
+********************************

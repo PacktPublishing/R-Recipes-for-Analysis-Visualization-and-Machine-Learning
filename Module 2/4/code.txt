@@ -1,0 +1,111 @@
+*********************************
+**Simple pie chart***************
+*********************************
+data = c(179718,41370,41914,44280)
+pct = (data/sum(data))*100
+pct = round(pct,2)
+labels = c("Army", "Navy", "Air Force","Marines")
+labels = paste(labels,pct, "%")
+col = c("purple", "violetred1", "green3","red", "cyan")
+pie(pct,col = col, radius = 1, init.angle = 90, clockwise = TRUE, labels =labels, main = "Traumatic Brain Injury 2000-2014(Q2)")
+*********************************
+***Pie charts with barplots******
+*********************************
+data2 = read.table("service.csv", header = TRUE, sep = ",")
+army = as.matrix(data2[1,2:16])
+navy = as.matrix(data2[2,2:16])
+airforce = as.matrix(data2[3,2:16])
+marine = as.matrix(data2[4,2:16])
+j = layout(matrix(c(1,2,2,2,1,3,4,5),2,4, byrow = TRUE))
+layout.show(j)
+barplot(army, names.arg= c(2000:2014), space = 0.5, main = "Army")
+pie(pct, radius = 1, init.angle = 90, clockwise = TRUE, labels =labels, border = "white", col= c("#6C6D5D","#BEBCB0","#BEBCB0","#BEBCB0"))
+barplot(navy, names.arg= c(2000:2014), space = 0.5, main = "Navy")
+barplot(airforce, names.arg= c(2000:2014), space = 0.5, main = "Air Force")
+barplot(marine, names.arg= c(2000:2014), space = 0.5, main = "Marines")
+****************************************
+***Constructing Pie charts with Labels***
+*****************************************
+install.packages("plotrix")
+library(plotrix)
+data = c(179718,41370,41914,44280)
+pct = (data/sum(data))*100
+pct = round(pct,2)
+labels = c("Army", "Navy", "Air Force","Marines")
+labels1 = paste(pct, "%")
+plot(1:5,type="n",main="Traumatic Brain Injury 2000-2014(Q2)",xlab="",ylab="",axes=FALSE)
+pie1<-floating.pie(3,3,pct,radius=1,col=c("red","blue","green","yellow"), startpos = 4)
+pie.labels(3,3,pie1,radius=0.4,labels=labels1)
+legend("left", fill = c("red","blue","green","yellow"), legend = c("Army", "Navy","Air Force", "Marine"))
+****************************************
+***Part of a Whole**********************
+****************************************
+data = c(179718,41370,41914,44280)
+pct = (data/sum(data))*100
+pct = round(pct,2)
+label = paste(pct, "%")
+par(mfrow =c(2,2))
+plot(1:5,type="n",main="TBI in Army 2000-2014(Q2)",xlab="",ylab="",axes=FALSE)
+pie1<-floating.pie(3,3,pct,radius=0.8,col=c("#6C6D5D","#BEBCB0","#BEBCB0","#BEBCB0"),border = FALSE, startpos = 4)
+pie.labels(3,3, 5.837518 ,radius=0.9,labels=label[1])
+plot(1:5,type="n",main="TBI in Navy 2000-2014(Q2)",xlab="",ylab="",axes=FALSE)
+pie2<-floating.pie(3,3,pct,radius=0.8,col=c("#BEBCB0","#6C6D5D","#BEBCB0","#BEBCB0"),border = FALSE, startpos = 4)
+pie.labels(3,3, 8.097893 ,radius=0.9,labels=label[2])
+plot(1:5,type="n",main="TBI in Air Force 2000-2014(Q2)",xlab="",ylab="",axes=FALSE)
+pie2<-floating.pie(3,3,pct,radius=0.8,col=c("#BEBCB0","#BEBCB0","#6C6D5D","#BEBCB0"),border = FALSE, startpos = 4)
+pie.labels(3,3, 8.949265 ,radius=0.9,labels=label[3])
+plot(1:5,type="n",main="TBI in Marines 2000-2014(Q2)",xlab="",ylab="",axes=FALSE)
+pie2<-floating.pie(3,3,pct,radius=0.8,col=c("#BEBCB0","#BEBCB0","#BEBCB0","#6C6D5D"),border = FALSE, startpos = 4)
+pie.labels(3,3,  9.830482 ,radius=0.9,labels=label[4])
+************************************
+***Donut Chart**********************
+************************************
+install.packages("plotrix")
+library(plotrix)
+data = c(179718,41370,41914,44280)
+pct = (data/sum(data))*100
+pct = round(pct,2)
+labels = c("Army", "Navy", "Air Force","Marines")
+labels1 = paste(labels,pct, "%")
+plot(1:5,type="n",xlab="",ylab="",axes=FALSE)
+pie1<-floating.pie(3,3,pct,radius=1,col= rainbow(4),startpos = 4)
+pie.labels(3,3, pie1,radius=1,labels= labels1)
+draw.circle(3,3,radius=0.5,col="white")
+textbox(c(2.5,3.5),3.5,c("Traumatic Brain Injury: 2000- 2014"),cex = 1.5, justify ="c",box = FALSE)
+*************************************
+**Integrating Pie charts with maps***
+*************************************
+install.packages(c("maps","plotrix"))
+library(maps)
+library(plotrix)
+map("state")
+title("Fake Gender based voter turnout, 2045")
+map.axes()
+data1 = c(20,80)
+data2 = c(30,70)
+floating.pie(-97.563461,31.054487,data1,radius=1.5,col= c("blue","red"),startpos = 4)
+floating.pie(-119.681564,36.116203,data2,radius=1.5,col= c("blue","red"),startpos = 4)
+legend("bottomright", fill = c("blue","red"), legend = c("male","female"))
+*************************************
+***Slope Charts**********************
+*************************************
+data = read.csv("mortality1.csv")
+rownames(data)=data[,1]
+data= data[,-1]
+bumpchart(data[,3:4], lwd = 2, col= ("#BD7769"), top.labels= NA, rank = FALSE)
+boxed.labels(1,11,labels = c("Rank in 2004"), col = "blue", border = FALSE)
+boxed.labels(2,11,labels = c("Rank in 2012"), col = "blue", border = FALSE)
+*************************************
+***Fan plot**************************
+*************************************
+install.packages(c("RColorBrewer","plotrix"))
+library(plotrix)
+library(RColorBrewer)
+data = c(179718,41370,41914,44280)
+pct = (data/sum(data))*100
+pct = round(pct,2)
+labels = c("Army", "Navy", "Air Force","Marines")
+labels = paste(labels,pct, "%")
+colors = brewer.pal(6,"BrBG")
+fan.plot(pct, labels = labels, col = colors, max.span=pi,align = "left", main ="Traumatic Brain Injury: 2000-2014")
+************

@@ -1,0 +1,259 @@
+******************************
+**recipe 1 : basic plotting***
+******************************
+install.packages("ISLR")
+library(ISLR)
+attach(Carseats)
+head(Carseats)
+plot(Income, Sales,col = c(Urban),pch = 20, main ="sales of Child Car Seats", xlab = "Income (000's of Dollars)", ylab ="Unit Sales (in 000's)" )
+legend("topright",cex = 0.6, fill = c("red","black"), legend = c("Yes","No"))
+*******************************
+***There's More****************
+*******************************
+attach(Carseats)
+head(Carseats)
+par(mfrow=c(2,3)) # divides the plotting region in 4 parts 2 rows and 2 columns
+plot(Income, Sales,col = "blue") # use of color name
+plot(Income, Sales,col = "3") # use of numeric value in place of name
+plot(Income, Sales,col = "#4646ea") # use of hex color
+plot(Income, Sales,col = "#4646ea", pch = 10) # using a different symbol. type ?points in r console window to learn more
+plot(Income, Sales,col = rgb(red = 0.5,green =0.5,blue =1), pch = 10) # assigning rgb color type ?rgb in r console window to learn more
+plot(Income, Sales,col =rainbow(3), pch = 20) # using the rainbow to assign 3 different colors. type ?rainbow in r console window to learn more
+******************************
+**recipe 2 :Abline and text***
+******************************
+setwd("your path") # use setwd() to set your working directory. This code if used will give an error as it needs path
+child = read.csv("chlmort.csv", header = TRUE, sep =",")
+summary(child)
+head(child)
+ plot(child$gdp_bil, child$child, pch = 20, col = "#756bb1", xlim=c(0,max(child$gdp_bil)), ylim = c(0,190), xlab = "GDP in Billions in current US$", ylab ="Child Mortality rate", main = "child Mortality Rate in selected countries for 2012")
+abline(h = (36.18), lwd = 1, col = "red")
+text(8000,25,labels = c("Luxemborg"), cex = 0.75)
+text(600,182,labels= c("Sierra Leone"), col = "red", cex = 0.75)
+text(4000, 50,labels = c("Average Child Mortality"), col = "red", cex = 0.75)
+
+**********************************************
+**recipe 2 : Theres More - smooth Scatter*****
+***********************************************
+child = read.csv("chlmort.csv", header = TRUE, sep =",")
+summary(child)
+scatter.smooth(child$gdp_bil, child$child, pch = 20, lwd =0.75, col = "Blue", lpars = list(lty = 3, col ="black", lwd = 2),xlab ="GDP in Billions in current US$", ylab ="Child Mortality rate", main = "Child Mortality Rate in selected countries for 2012" )
+**********************************************
+**Recipe 3: Connecting Points in a scatter****
+**********************************************
+income = read.csv("ginivsgdp1.csv", header = TRUE)
+plot(income$gdp_ann,income$Gini,pch = 20, col = c(data$Presidents), type = "o",xlab =" GDP of USA", ylab = "Gini coefficient",main = "Inequality in USA", xaxp = c(0,18000,8))
+cols = as.numeric(income$Presidents)
+legend("bottomright",fill = c(6,7,4,2,9,5,3,1,8), legend = c("Johnson","Nixon","Ford","Carter","Reagan","G.Bush","Clinton","Bush","Obama"), bty = "n",cex = 0.7)
+**********************************************
+**Recipe 3: Theres More **********************
+**********************************************
+income = read.csv("ginivsgdp1.csv", header = TRUE)
+plot(income$gdp_ann,income$Gini,pch = 20, col = "Black", xlab =" GDP of USA", ylab = "Gini coefficient", xaxp = c(0,18000,10),bty = "n")
+abline(v = 14958, lwd =1.5)
+text(16200, 0.46,"obama")
+# to add mutiple labels###
+plot(income$gdp_ann,income$Gini,pch = 20, col = "Black", xlab =" GDP of USA", ylab = "Gini coefficient", xaxp = c(0,18000,10),bty = "n")
+text(income$gdp_ann, income$Gini,income$years, cex = 0.7, pos = 2, offset = 0)
+
+**********************************************
+**Recipe 5: Connecting Points in a scatter****
+**********************************************
+install.packages("googleVis")
+library(googleVis)
+income = read.csv("ginivsgdp1.csv", header = TRUE)
+scater = data.frame(gdp = c(income$gdp_ann),gini= c(income$Gini)) 
+# A simple scatter plot
+scaterp = gvisScatterChart(scater)
+# add the trendline
+scaterp1 = gvisScatterChart(scater, option= list(width = 500, height = 600,legend = "none",title = "Reltionship between Inequality and GDP growth in USA", 
+						hAxis = "{title :'GDP'}",
+						vAxis = "{title :'Gini'}",
+						trendlines="{0:{type : 'linear'}}"))
+plot(scaterp1)
+# add the equation and coefficients
+scaterp2= gvisScatterChart(scater, option= list(width = 500, height = 600,legend = "none",title = "Reltionship between Inequality and GDP growth in USA" ,
+						hAxis = "{title :'GDP'}",
+						vAxis = "{title :'Gini'}",
+						trendlines="{0:{type : 'linear', visibleInLegend: true}}")
+plot(scaterp2)
+# add coefficient of Determination to the plot
+scaterp3 = gvisScatterChart(scater, option= list(width = 650, height = 600,legend = "none",title = "Reltionship between Inequality and GDP growth in USA" ,
+						hAxis = "{title :'GDP'}",
+						vAxis = "{title :'Gini'}",
+						trendlines="{0:{type : 'linear', visibleInLegend: true, showR2: true}}"))
+plot(scaterp3)
+#adding data opacity
+scaterp4 = gvisScatterChart(scater, option= list(width = 650, height = 600, legend = "none",title = "Reltionship between Inequality and GDP growth in USA",
+						hAxis = "{title :'GDP'}",
+						vAxis = "{title :'Gini'}",
+						dataOpacity = 0.8,
+						trendlines="{0:{type : 'linear', visibleInLegend: true, showR2: true}}"))
+plot(scaterp4)
+**********************************************
+**********Theres More*************************
+**********************************************
+install.packages("googleVis")
+library(googleVis)
+income = read.csv("ginivsgdp2.csv", header = TRUE)
+scaterp = gvisScatterChart(income, option= list(width = 650, height = 600, dataOpacity = 0.8, title = "Reltionship between Inequality and GDP growth in USA",
+				                hAxis = "{title :'GDP'}",
+						vAxis = "{title :'Gini'}"))
+plot(scaterp)
+**********************************************
+***********Recipe 8 barplot*******************
+**********************************************
+
+setwd("D:/book/scatter_Area/chapter1")
+data = read.csv("infant.csv", header = TRUE)
+data = data[order(data$Total2011, decreasing = TRUE),]
+new = ifelse(data$Total2011>12.2,"yes","no")
+data = cbind(data,new)
+par(mar = c(10,5,5,5))
+barplot(data$Total2011, las = 2, names.arg= data$India,width = 0.80, border = NA,ylim=c(0,20), col = "#e34a33", main = "Infant Mortality Rate of India in 2011")
+abline(h = 12.2, lwd =2, col = "white", lty =2)
+**********************************************
+********recipe 9 - interactive barplots******
+**********************************************
+install.packages("googleVis")
+library(googleVis)
+stock = read.csv("spq.csv", header = TRUE)
+barpt = gvisBarChart(stock, xvar = "Date", yvar = c("Returns"),
+                     options = list(orientation = "horizontal", width = 1400, height = 500,
+                                    title = "Microsoft returns over 2 year period",
+                                    legend = "none",
+                                    hAxis = "{title :'Time Period',titleTextStyle :{color:'red'}}",
+                                    vAxis = "{title : 'Returns(%)', ticks : [-12,-6,0,6, 12],titleTextStyle :{color: 'red'}}", bar = "{groupWidth: '100%'}"))
+plot(barpt)
+**********************************************
+*******Recipe 10 - barplot and Table**********
+**********************************************
+
+install.packages("googleVis")
+library(googleVis)
+stock = read.csv("spq.csv", header = TRUE)
+barpt = gvisBarChart(stock, xvar = "Date", yvar = c("Returns"),
+                     options = list(orientation = "horizontal", width = 1400, height = 500,
+                                    title = "Microsoft returns over 2 year period",
+                                    legend = "none",
+                                    hAxis = "{title :'Time Period',titleTextStyle :{color:'red'}}",
+                                    vAxis = "{title : 'Returns(%)', ticks : [-12,-6,0,6, 12],titleTextStyle :{color: 'red'}}", bar = "{groupWidth: '100%'}"))
+
+table <- gvisTable(stock, options=list(page='enable',
+                                      height='automatic',
+                                      width='automatic'),formats = list(Returns =' #.##'))
+comb = gvisMerge(table,barpt, horizontal = TRUE)
+plot(comb)
+**********************************************
+*******Recipe # 11 - A Line plot**************
+**********************************************
+install.packages("googleVis")
+library(googleVis)
+frt = read.csv("fertility.csv", header = TRUE, sep =",")
+line = gvisLineChart(frt, xvar = "Year", 
+                     yvar=c("Australia","Austria","Belgium","Canada","Chile","OECD34"), 
+                     options = list( width = 1100, height= 500, backgroundColor = "#FFFF99",title ="Fertility Rate in OECD countries" ,
+                                     vAxis = "{title : 'Total Fertility Rate',gridlines:{color:'#DEDECE',count : 4}, ticks : [0,1,2,3,4]}",
+                                     series = "{0:{color:'black', visibleInLegend :false},
+       1:{color:'BDBD9D', visibleInLegend :false},
+	   2:{color:'BDBD9D', visibleInLegend :false},
+           3:{color:'BDBD9D', visibleInLegend :false},
+           4:{color:'BDBD9D', visibleInLegend :false},
+          34:{color:'3333FF', visibleInLegend :true}}"))
+plot(line)
+**********************************************
+***Recipe 12 - Line plot with entire data set*
+**********************************************
+install.packages("googleVis")
+library(googleVis)
+frt = read.csv("fertility.csv", header = TRUE, sep =",")
+line = gvisLineChart(frt, xvar = "Year", yvar=c("Australia","Austria","Belgium","Canada","Chile","Czech.Republic",
+						"Denmark","Estonia","Finland","France","Germany","Greece","Hungary",
+						"Iceland","Ireland","Israel","Italy","Japan","Korea","Luxembourg","Mexico",
+						"Netherlands","New.Zealand","Norway","Poland","Portugal","Slovakia","Slovenia",
+						"Spain","Sweden","Switzerland","Turkey","United.Kingdom","United.States","OECD34"), 
+			options = list( width = 1200, backgroundColor = "#ADAD85",title ="Fertility Rate in OECD countries" ,
+					vAxis = "{gridlines:{color:'#DEDECE',count : 3}, ticks : [0,1,2,3,4]}",
+					series = "{0:{color:'BDBD9D', visibleInLegend :false},
+						   1:{color:'BDBD9D', visibleInLegend :false},
+										2:{color:'BDBD9D', visibleInLegend :false},
+										3:{color:'BDBD9D', visibleInLegend :false},
+										4:{color:'BDBD9D', visibleInLegend :false},
+										5:{color:'BDBD9D', visibleInLegend :false},
+										6:{color:'BDBD9D', visibleInLegend :false},
+										7:{color:'BDBD9D', visibleInLegend :false},
+										8:{color:'BDBD9D', visibleInLegend :false},
+										9:{color:'BDBD9D', visibleInLegend :false},
+										10:{color:'BDBD9D', visibleInLegend :false},
+										11:{color:'BDBD9D', visibleInLegend :false},
+										12:{color:'BDBD9D', visibleInLegend :false},
+										13:{color:'BDBD9D', visibleInLegend :false},
+										14:{color:'BDBD9D', visibleInLegend :false},
+										15:{color:'BDBD9D', visibleInLegend :false},
+										16:{color:'BDBD9D', visibleInLegend :false},
+										17:{color:'BDBD9D', visibleInLegend :false},
+										18:{color:'BDBD9D', visibleInLegend :false},
+										19:{color:'BDBD9D', visibleInLegend :false},
+										20:{color:'009933', visibleInLegend :true},
+										21:{color:'BDBD9D', visibleInLegend :false},
+										22:{color:'BDBD9D', visibleInLegend :false},
+										23:{color:'BDBD9D', visibleInLegend :false},
+										24:{color:'BDBD9D', visibleInLegend :false},
+										25:{color:'BDBD9D', visibleInLegend :false},
+										26:{color:'BDBD9D', visibleInLegend :false},
+										27:{color:'BDBD9D', visibleInLegend :false},
+										28:{color:'BDBD9D', visibleInLegend :false},
+										29:{color:'BDBD9D', visibleInLegend :false},
+										30:{color:'BDBD9D', visibleInLegend :false},
+										31:{color:'996600', visibleInLegend :true},
+										32:{color:'BDBD9D', visibleInLegend :false},
+										33:{color:'BDBD9D', visibleInLegend :false},
+										34:{color:'3333FF', visibleInLegend :true}}"))
+plot(line)
+**********************************************
+***Recipe 13 -Time Line plot / Gantt Chart****
+**********************************************
+install.packages("googleVis")
+library(googleVis)
+base = read.csv("disable.csv")
+data = data.frame(position = as.character(base$position), player = as.character(base$player), start = as.POSIXct(base$start), end = as.POSIXct(base$end))
+baseball = gvisTimeline(data = data, rowlabel ="position",start ="start", end = "end",barlabel ="player" , option = list(width = 1000, height = 900,timeline="{singleColor :'#002A3E'}"))
+plot(baseball)
+**********************************************
+***Recipe 14 -Merging Histogram****
+**********************************************
+install.packages("googleVis")
+library(googleVis)
+stk = read.csv("stock_cor.csv", header = TRUE, sep = ",")
+aapl = data.frame(stk$AAPL)
+msft = data.frame(stk$MSFT)
+googl = data.frame(stk$GOOGL)
+al = gvisHistogram(aapl, options = list(histogram = "{bucketSize :1}",legend = "none",title ='Distribution of AAPL Returns', height = 600,width = 500,
+                   hAxis = "{showTextEvery: 5,title: 'Returns'}",vAxis = "{gridlines : {count:4}, title : 'Frequency'}"))
+mft = gvisHistogram(msft, options = list(histogram = "{bucketSize :1}",legend = "none",title ='Distribution of MSFT Returns', height = 600, width = 500,
+                    hAxis = "{showTextEvery: 5,title: 'Returns'}",vAxis = "{gridlines : {count:4}, title : 'Frequency'}"))
+mrg = gvisMerge(al,mft, horizontal = TRUE)
+plot(mrg)
+
+
+**********************************************
+***Recipe 15 -Bubble PLot*********************
+**********************************************
+install.packages("googleVis")
+library(googleVis)
+crm = read.csv("crimeusa.csv", header = TRUE, sep =",")
+bub1 = gvisBubbleChart(crm,idvar = "States",xvar= "Robbery", yvar= "Burglary", sizevar ="Population", colorvar = "Year",
+			options = list(legend = "none",width = 900, height = 600,title =" Crime per State in 2012", sizeAxis ="{maxSize : 40, minSize :0.5}",vAxis = "{title : 'Burglary'}",hAxis= "{title : 'Robbery'}"))
+plot(bub1)
+bub2 = gvisBubbleChart(crm,idvar = "States",xvar= "Robbery", yvar= "Burglary",sizevar ="Population",
+                       options = list(legend = "none",width = 900, height = 600,title =" Crime per State in 2012", sizeAxis ="{maxSize : 40, minSize :0.5}",vAxis = "{title : 'Burglary'}",hAxis= "{title : 'Robbery'}"))
+plot(bub2)
+bub3 = gvisMerge(bub1,bub2, horizontal = TRUE)
+plot(bub3)
+**********************************************
+***Recipe 16 -Waterfall plot******************
+**********************************************
+install.packages("plotrix")
+library(plotrix)
+sales = read.csv("waterf.csv")
+staircase.plot(sales$value, totals= sales$logic, labels = sales$labels, total.col = c("lightgreen"),inc.col = c("blue","red","red","blue","blue","blue","red","red","blue","blue","red","blue"),main ="Waterfall Plot showing financial data")
