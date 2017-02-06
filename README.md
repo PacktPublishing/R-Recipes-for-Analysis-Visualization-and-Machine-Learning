@@ -1,4 +1,4 @@
-# R-Recipes-for-Analysis-Visualization-and-Machine-Learning
+# R Recipes for Analysis Visualization and Machine Learning
 This is the code repository for R-Recipes-for-Analysis-Visualization-and-Machine-Learning, published by Packt. It contains all the necessary code files.
 
 ##What You Will Learn:
