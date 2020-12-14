@@ -1,3 +1,8 @@
+## $5 Tech Unlocked 2021!
+[Buy and download this Course for only $5 on PacktPub.com](https://www.packtpub.com/product/r-recipes-for-analysis-visualization-and-machine-learning/9781787289598)
+-----
+*The $5 campaign         runs from __December 15th 2020__ to __January 13th 2021.__*
+
 # R Recipes for Analysis Visualization and Machine Learning
 This is the code repository for R-Recipes-for-Analysis-Visualization-and-Machine-Learning, published by Packt. It contains all the necessary code files.
 
